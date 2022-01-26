@@ -1117,10 +1117,15 @@ public class BleModule implements BleAdapter {
                         return mapRxBleAdapterStateToLocalBluetoothState(bleAdapterState);
                     }
                 })
-                .subscribe(new Action1<String>() {
+                .subscribe(new Action0<String>() {
                     @Override
                     public void call(String state) {
                         onAdapterStateChangeCallback.onEvent(state);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable error) {
+                        // Fix crash as no error handling
                     }
                 });
     }
